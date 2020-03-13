@@ -22,6 +22,6 @@ export const Item = styled.TouchableOpacity`
 export const Image = styled.Image.attrs({
   resizeMode: 'contain',
 })`
-  width: 150px;
-  height: 250px;
+  width: 105px;
+  height: 180px;
 `;

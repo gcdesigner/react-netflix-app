@@ -9,8 +9,9 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 
 import Main from './pages/Main';
 import User from './pages/User';
+import Search from './pages/Search';
 
-import LogoTitle from './components/LogoTitle';
+import SearchHeader from './components/SearchHeader';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -18,7 +19,7 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#fff',
-    background: '#111',
+    background: '#1A191A',
     card: '#111',
     text: '#fff',
     border: '#fff',
@@ -29,27 +30,30 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function Routes() {
+  function stackScreen() {
+    return (
+      <Stack.Navigator headerMode="screen" mode="card">
+        <Stack.Screen
+          name="Buscar"
+          component={Search}
+          // options={{
+          //   headerTitle: props => <SearchHeader {...props} />,
+          //   headerStyle: {
+          //     // backgroundColor: 'transparent',
+          //     elevation: 0,
+          //   },
+          //   transitionSpec: {
+          //     open: config,
+          //     close: config,
+          //   },
+          // }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer theme={MyTheme}>
-      {/* <Stack.Navigator initialRouteName="Home" headerMode="screen">
-        <Stack.Screen
-          name="Home"
-          component={Main}
-          options={{
-            title: 'Gabriel',
-            headerTransparent: true,
-            headerBackTitleVisible: false,
-            headerTitle: props => <LogoTitle {...props} />,
-            headerStyle: {
-              backgroundColor: 'transparent',
-              elevation: 0,
-            },
-          }}
-        />
-
-        <Stack.Screen name="User" component={User} />
-      </Stack.Navigator> */}
-
       <Tab.Navigator
         initialRouteName="Home"
         tabBarOptions={{
@@ -60,7 +64,7 @@ export default function Routes() {
             borderTopColor: 0,
           },
           tabStyle: {
-            backgroundColor: '#080808',
+            backgroundColor: '#121212',
             elevation: 0,
             borderTopWidth: 0,
             borderTopColor: 'transparent',
@@ -78,10 +82,10 @@ export default function Routes() {
         />
         <Tab.Screen
           name="Buscar"
-          component={User}
+          component={stackScreen}
           options={{
             tabBarIcon: props => <Icon name="search1" size={20} color="#aaa" />,
-            title: 'Buscar',
+            title: 'Buscas',
           }}
         />
 
@@ -92,7 +96,7 @@ export default function Routes() {
             tabBarIcon: props => (
               <IconM name="airplay" size={20} color="#aaa" />
             ),
-            title: 'Buscar',
+            title: 'Em breve',
           }}
         />
 
@@ -103,7 +107,7 @@ export default function Routes() {
             tabBarIcon: props => (
               <Icon name="download" size={20} color="#aaa" />
             ),
-            title: 'Buscar',
+            title: 'Downloads',
           }}
         />
 
@@ -112,7 +116,7 @@ export default function Routes() {
           component={User}
           options={{
             tabBarIcon: props => <IconM name="menu" size={20} color="#aaa" />,
-            title: 'Buscar',
+            title: 'Mais',
           }}
         />
       </Tab.Navigator>

@@ -9,7 +9,7 @@ import logoMovie from '../../assets/logo-movie.png';
 
 export default function BannerHome() {
   const gradientHeight = 100;
-  const gradientBackground = '#111';
+  const gradientBackground = '#1A191A';
   const data = Array.from({ length: gradientHeight });
 
   return (
