@@ -11,7 +11,7 @@ import BannerHome from '../../components/BannerHome';
 import ListMovies from '../../components/ListMovies';
 import ListTrendMovies from '../../components/ListTrendMovies';
 
-export default function Main() {
+export default function Main({ navigation }) {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [trendMovies, setTrendMovies] = useState([]);
@@ -25,12 +25,19 @@ export default function Main() {
       const respSeries = await api.get(`/tv/popular?api_key=${API_KEY}&page=1`);
 
       const respTrendMovies = await api.get(
-        `/trending/movie/day?api_key=${API_KEY}&page=1`
+        `/movie/upcoming?api_key=${API_KEY}&page=1&total_results=1`
+      );
+
+      const lancamento = respTrendMovies.data.results.filter(
+        (i, index) => index === 1
       );
 
       setMovies(respMovies.data.results);
       setSeries(respSeries.data.results);
-      setTrendMovies(respTrendMovies.data.results);
+      setTrendMovies(lancamento);
+      console.tron.log(
+        respTrendMovies.data.results.filter((i, index) => index === 1)
+      );
     }
     getPopular();
   }, []);
@@ -43,8 +50,15 @@ export default function Main() {
       <View>
         <LogoTitle />
         <BannerHome />
-        <ListMovies sectionTitle="Filmes Populares" data={movies} />
-        <ListTrendMovies sectionTitle="Lançcamentos" data={trendMovies} />
+        <ListMovies
+          sectionTitle="Filmes Populares"
+          data={movies}
+          navigation={navigation}
+        />
+        <ListTrendMovies
+          sectionTitle="Lançamento da semana"
+          data={trendMovies}
+        />
         <ListMovies sectionTitle="Séries populares" data={series} />
       </View>
     </ScrollView>

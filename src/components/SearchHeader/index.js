@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import * as S from './styles';
 
-export default function SearchHeader({ navigation }) {
+export default function SearchHeader() {
   const inputRef = useRef();
 
   useEffect(() => {

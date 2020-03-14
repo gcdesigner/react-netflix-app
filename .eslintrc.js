@@ -25,6 +25,7 @@ module.exports = {
         extensions: ['.jsx', '.js'],
       },
     ],
+    'react/prop-types': 'off',
     'import/prefer-default-export': 'off',
     'no-console': 'off',
   },

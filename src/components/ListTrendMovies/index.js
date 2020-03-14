@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import * as S from './styles';
 
 export default function ListTrendMovies({ sectionTitle, data }) {
-  console.tron.log(data);
   return (
     <S.Container>
       <S.Title>{sectionTitle}</S.Title>
@@ -17,7 +16,7 @@ export default function ListTrendMovies({ sectionTitle, data }) {
           <S.Item>
             <S.Image
               source={{
-                uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`,
+                uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
               }}
             />
           </S.Item>
