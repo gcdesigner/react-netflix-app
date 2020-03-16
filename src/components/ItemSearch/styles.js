@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
+  max-width: 100%;
   flex-direction: row;
   background: #21201e;
   margin-bottom: 2px;
@@ -21,7 +22,11 @@ export const Meta = styled.View`
   padding: 0 15px 0 10px;
 `;
 
-export const TitleItem = styled.Text`
+export const TitleItem = styled.Text.attrs({
+  numberOfLines: 2,
+})`
+  flex: 1;
   color: #fff;
   font-size: 16px;
+  padding-right: 10px;
 `;

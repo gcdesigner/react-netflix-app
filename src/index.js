@@ -1,10 +1,14 @@
 import React from 'react';
-
-import { SafeAreaView, StatusBar } from 'react-native';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import './config/ReactotronConfig';
 
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+
+import { persistor, store } from './store';
 import Routes from './routes';
 
 const MyTheme = {
@@ -22,18 +26,20 @@ const MyTheme = {
 
 const App = () => {
   return (
-    <>
-      <StatusBar
-        barStyle="light-content"
-        translucent
-        backgroundColor="transparent"
-      />
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#333' }}>
-        <NavigationContainer theme={MyTheme}>
-          <Routes />
-        </NavigationContainer>
-      </SafeAreaView>
-    </>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <SafeAreaProvider>
+          <StatusBar
+            barStyle="light-content"
+            translucent
+            backgroundColor="transparent"
+          />
+          <NavigationContainer theme={MyTheme}>
+            <Routes />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 

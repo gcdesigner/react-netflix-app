@@ -3,13 +3,14 @@ import { Dimensions } from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
+  position: relative;
 `;
 
-export const WrapperImage = styled.View`
+export const WrapperImage = styled.TouchableOpacity`
   position: relative;
   align-items: center;
   justify-content: center;
-  height: 350px;
+  height: 250px;
 `;
 
 export const Image = styled.Image.attrs({
@@ -19,7 +20,7 @@ export const Image = styled.Image.attrs({
   top: 0;
   left: 0;
   width: ${Dimensions.get('window').width}px;
-  height: 350px;
+  height: 250px;
 `;
 
 export const Details = styled.View`
@@ -104,4 +105,24 @@ export const Crew = styled.Text`
 
 export const Director = styled.Text`
   color: #ccc;
+`;
+
+export const ActionArea = styled.View`
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 20px 0;
+`;
+
+export const BtnAction = styled.TouchableOpacity`
+  max-width: 25%;
+  margin: 0 20px;
+  align-items: center;
+  text-align: center;
+`;
+
+export const BtnActionText = styled.Text`
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
 `;

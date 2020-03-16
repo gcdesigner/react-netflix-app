@@ -7,15 +7,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconM from 'react-native-vector-icons/MaterialIcons';
 
-import Main from '../pages/Main';
-import Search from '../pages/Search';
-import Details from '../pages/Details';
-import User from '../pages/User';
+import Home from '~/pages/Home';
+import Search from '~/pages/Search';
+import Details from '~/pages/Details';
+import Video from '~/pages/Video';
+import CommingSoon from '~/pages/CommingSoon';
+import Downloads from '~/pages/Downloads';
+import More from '~/pages/More';
 
-import SearchHeader from '../components/SearchHeader';
+import SearchHeader from '~/components/SearchHeader';
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
+const VideoStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +27,7 @@ const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen
       name="Home"
-      component={Main}
+      component={Home}
       options={{
         headerShown: false,
       }}
@@ -31,6 +35,15 @@ const HomeStackScreen = () => (
     <HomeStack.Screen
       name="Details"
       component={Details}
+      options={{
+        headerTransparent: true,
+        headerBackTitleVisible: false,
+        title: null,
+      }}
+    />
+    <HomeStack.Screen
+      name="Video"
+      component={VideoStackScreen}
       options={{
         headerTransparent: true,
         headerBackTitleVisible: false,
@@ -50,14 +63,36 @@ const SearchStackScreen = () => (
         headerTitle: () => <SearchHeader />,
       }}
     />
-    <SearchStack.Screen name="Details" component={Details} />
+    <SearchStack.Screen
+      name="Details"
+      component={Details}
+      options={{
+        headerTransparent: true,
+        headerBackTitleVisible: false,
+        title: null,
+      }}
+    />
   </SearchStack.Navigator>
+);
+
+const VideoStackScreen = () => (
+  <VideoStack.Navigator headerMode="none" mode="modal">
+    <VideoStack.Screen
+      name="Video"
+      component={Video}
+      options={{
+        gestureEnabled: false,
+        headerStatusBarHeight: 0,
+      }}
+    />
+  </VideoStack.Navigator>
 );
 
 export default function Routes() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
+      lazy={true}
       tabBarOptions={{
         background: 'red',
         inactiveTintColor: '#aaa',
@@ -98,7 +133,7 @@ export default function Routes() {
 
       <Tab.Screen
         name="EmBreve"
-        component={User}
+        component={CommingSoon}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <IconM name="airplay" size={20} focused={focused} color={color} />
@@ -109,7 +144,7 @@ export default function Routes() {
 
       <Tab.Screen
         name="Downloads"
-        component={User}
+        component={Downloads}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Icon name="download" size={20} focused={focused} color={color} />
@@ -120,7 +155,7 @@ export default function Routes() {
 
       <Tab.Screen
         name="Mais"
-        component={User}
+        component={More}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <IconM name="menu" size={20} focused={focused} color={color} />
@@ -130,35 +165,4 @@ export default function Routes() {
       />
     </Tab.Navigator>
   );
-
-  // return (
-  //   <Stack.Navigator initialRouteName="Home" headerMode="screen">
-  //     <Stack.Screen
-  //       name="Home"
-  //       component={Tabs}
-  //       options={
-  //         {
-  //           // headerShown: false,
-  //         }
-  //       }
-  //     />
-  //     <Stack.Screen
-  //       name="Buscar"
-  //       component={Tabs}
-  //       options={{
-  //         title: 'teste',
-  //         headerTitle: () => <SearchHeader />,
-  //       }}
-  //     />
-  //     <Stack.Screen
-  //       name="Details"
-  //       component={Details}
-  //       options={{
-  //         headerTransparent: true,
-  //         headerBackTitleVisible: false,
-  //         title: null,
-  //       }}
-  //     />
-  //   </Stack.Navigator>
-  // );
 }

@@ -1,16 +1,21 @@
 import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 import * as S from './styles';
 
-import bgHome from '../../assets/bg-home.png';
-import logoMovie from '../../assets/logo-movie.png';
+import Gradient from '../Gradient';
+
+import bgHome from '~/assets/bg-home.png';
+import logoMovie from '~/assets/logo-movie.png';
 
 export default function BannerHome() {
-  const gradientHeight = 100;
-  const gradientBackground = '#1A191A';
-  const data = Array.from({ length: gradientHeight });
+  const navigation = useNavigation();
+
+  function handlePlayMovie() {
+    navigation.navigate('Video');
+  }
 
   return (
     <S.Container>
@@ -23,7 +28,7 @@ export default function BannerHome() {
             <S.BtnText>Minha lista</S.BtnText>
           </S.BtnMyList>
 
-          <S.BtnWatch>
+          <S.BtnWatch onPress={handlePlayMovie}>
             <Icon name="play" size={20} color="#222" />
             <S.BtnWatchText>Assistir</S.BtnWatchText>
           </S.BtnWatch>
@@ -35,21 +40,7 @@ export default function BannerHome() {
         </View>
       </S.Actions>
 
-      {data.map((_, i) => (
-        <View
-          key={i}
-          style={{
-            position: 'absolute',
-            backgroundColor: gradientBackground,
-            height: 1,
-            bottom: gradientHeight - i,
-            right: 0,
-            left: 0,
-            zIndex: 2,
-            opacity: (1 / gradientHeight) * (i + 1),
-          }}
-        />
-      ))}
+      <Gradient />
     </S.Container>
   );
 }
